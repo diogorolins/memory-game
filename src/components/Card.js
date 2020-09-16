@@ -29,13 +29,12 @@ const Card = ({
   const isSuccessCard = successCards.includes(value.card);
 
   const turnCard = () => {
-    //o problema está em clicar duas vezes na carta
     setCardPosition(cardState["rotate"]);
-
     handleCard(value);
-
-    if (isSecondTurn() && !isTheSameCard(lastCard, value)) {
-      checkIfMatch(lastCard, value);
+    if (!isTheSameCard(lastCard, value)) {
+      if (isSecondTurn()) {
+        checkIfMatch(lastCard, value);
+      }
     }
   };
 
@@ -43,7 +42,7 @@ const Card = ({
     <div className="card-container">
       {isSuccessCard ? (
         <div className={cardState["done"]}>
-          <img src={`/img/sign/${value.card}.png`} alt="Signs" width="100" />
+          <img src={`/img/sign/${value.card}.png`} alt="Signs" width="110" />
         </div>
       ) : (
         <div className={cardPosition} onClick={turnCard}>
@@ -55,7 +54,7 @@ const Card = ({
               <img
                 src={`/img/sign/${value.card}.png`}
                 alt="Signs"
-                width="100"
+                width="110"
               />
             </div>
           </div>

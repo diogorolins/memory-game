@@ -2,19 +2,19 @@ import React, { useState, useEffect } from "react";
 import Card from "./Card";
 import { gameCards } from "../services/gameCards";
 
-const Cards = () => {
+const Cards = ({ gameStarted, endGame }) => {
   const [turn, setTurn] = useState([]);
   const [lastCard, setLastCard] = useState("");
   const [successCards, setSuccessCards] = useState([]);
   const [cardsToRotateBack, setsCardsToRotateBack] = useState([]);
 
   useEffect(() => {
-    console.log(gameCards);
-  }, []);
-
-  useEffect(() => {
     if (turn.length > 1) setTurn([]);
   }, [turn]);
+
+  useEffect(() => {
+    if (successCards.length === 12) endGame();
+  }, [successCards]);
 
   const clearCardsToRotate = () => {
     setsCardsToRotateBack([]);
@@ -42,23 +42,31 @@ const Cards = () => {
   };
 
   return (
-    <div className="tableCards">
-      {gameCards.map((c, i) => (
-        <div className="cardPosition" key={i}>
-          <Card
-            value={c}
-            isSecondTurn={isSecondTurn}
-            isTheSameCard={isTheSameCard}
-            checkIfMatch={checkIfMatch}
-            handleCard={handleCard}
-            successCards={successCards}
-            lastCard={lastCard}
-            cardsToRotateBack={cardsToRotateBack}
-            clearCardsToRotate={clearCardsToRotate}
-          />
+    <>
+      {gameStarted ? (
+        <div className="tableCards">
+          {gameCards.map((c, i) => (
+            <div className="cardPosition" key={i}>
+              <Card
+                value={c}
+                isSecondTurn={isSecondTurn}
+                isTheSameCard={isTheSameCard}
+                checkIfMatch={checkIfMatch}
+                handleCard={handleCard}
+                successCards={successCards}
+                lastCard={lastCard}
+                cardsToRotateBack={cardsToRotateBack}
+                clearCardsToRotate={clearCardsToRotate}
+              />
+            </div>
+          ))}
         </div>
-      ))}
-    </div>
+      ) : (
+        <div className="tableClosed">
+          <img src="/img/closed.jpg" width="700" alt="Game Closed" />
+        </div>
+      )}
+    </>
   );
 };
 
