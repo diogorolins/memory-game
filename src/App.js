@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Cards from "./components/Cards";
 import Header from "./components/Header";
 import BackDropBox from "./services/BackDropService";
@@ -15,9 +15,10 @@ function App() {
   const endGame = () => {
     setBackDrop(true);
     setGameStarted(false);
+
     setTimeout(() => {
       setBackDrop(false);
-    }, 2000);
+    }, 1000);
   };
 
   return (

@@ -30,10 +30,12 @@ const Card = ({
 
   const turnCard = () => {
     setCardPosition(cardState["rotate"]);
-    handleCard(value);
+
     if (!isTheSameCard(lastCard, value)) {
       if (isSecondTurn()) {
         checkIfMatch(lastCard, value);
+      } else {
+        handleCard(value);
       }
     }
   };
