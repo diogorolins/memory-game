@@ -2,7 +2,7 @@ body {
   background: #472b10;
   background-image: url("/img/fundo.jpg");
   background-position: center;
-  background-repeat: repeat-y;
+  background-repeat: repeat;
   background-size: 1800px;
   font-family: "Roboto", sans-serif;
 }
